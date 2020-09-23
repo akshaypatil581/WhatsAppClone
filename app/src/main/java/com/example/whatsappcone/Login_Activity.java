@@ -22,7 +22,7 @@ import org.w3c.dom.Text;
 public class Login_Activity extends AppCompatActivity {
 
     EditText userETLogin, passETLogin;
-    Button LoginBtn;
+    Button LoginBtn, RegisterBtn;
 
     // Firebase:
     FirebaseAuth auth;
@@ -37,8 +37,21 @@ public class Login_Activity extends AppCompatActivity {
         passETLogin = findViewById(R.id.editText3);
         LoginBtn = findViewById(R.id.buttonLogin);
 
+        RegisterBtn = findViewById(R.id.button2);
+
         //Firebase Auth:
         auth = FirebaseAuth.getInstance();
+
+        // Register Btn
+        RegisterBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login_Activity.this, Registration.class);
+                startActivity(i);
+
+            }
+        });
+
 
         // Login Button
         LoginBtn.setOnClickListener(new View.OnClickListener() {
