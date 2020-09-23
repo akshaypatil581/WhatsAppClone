@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -42,6 +44,23 @@ public class Registration extends AppCompatActivity {
 
         // Firebase Auth
         auth = FirebaseAuth.getInstance();
+        // Adding Event Listner to Button Register
+        registerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username_text = userET.getText().toString();
+                String email_text    = emailET.getText().toString();
+                String pass_text     = passET.getText().toString();
+
+                if (TextUtils.isEmpty(username_text) || TextUtils.isEmpty(email_text) || TextUtils.isEmpty(pass_text)) {
+                    Toast.makeText(Registration.this, "Please Fill All Fields", Toast.LENGTH_SHORT);
+                } else {
+                    RegisterNow(username_text, email_text, pass_text);
+                }
+            }
+        });
+
+
 
     }
 
