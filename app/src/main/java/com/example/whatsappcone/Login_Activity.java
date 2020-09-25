@@ -29,6 +29,18 @@ public class Login_Activity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseUser firebaseUser;
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        // Checking if user exists
+        if(firebaseUser != null) {
+            Intent i = new Intent(Login_Activity.this, MainActivity.class);
+            startActivity(i);
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,14 +55,7 @@ public class Login_Activity extends AppCompatActivity {
 
         //Firebase Auth:
         auth = FirebaseAuth.getInstance();
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-        // Checking if user exists
-        if(firebaseUser != null) {
-            Intent i = new Intent(Login_Activity.this, MainActivity.class);
-            startActivity(i);
-            finish();
-        }
 
 
         // Register Btn
