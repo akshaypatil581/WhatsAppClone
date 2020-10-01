@@ -1,6 +1,7 @@
 package com.example.whatsappcone.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.whatsappcone.MessageActivity;
 import com.example.whatsappcone.Model.Users;
 import com.example.whatsappcone.R;
 
@@ -41,7 +43,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Users users = mUsers.get(position);
+        final Users users = mUsers.get(position);
         holder.username.setText(users.getUsername());
 
         if (users.getImageURL().equals("default")) {
@@ -51,6 +53,17 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                     .load(users.getImageURL())
                     .into(holder.imageView);
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(context, MessageActivity.class);
+                i.putExtra("userid", users.getId());
+                context.startActivity(i);
+            }
+        });
+
     }
 
     @Override
